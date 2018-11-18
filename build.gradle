@@ -48,7 +48,7 @@ def getVersionTag = { ->
 group 'com.mtecresults'
 version = getVersionTag()+"-${git.head().abbreviatedId}"
 
-sourceCompatibility = 1.8
+sourceCompatibility = 1.7
 
 findbugs {
     ignoreFailures = true

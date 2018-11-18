@@ -7,9 +7,9 @@ import java.util.Collection;
 
 public interface ServerDataHandler {
 
-    default void handlePassings(Collection<Passing> passings){}
+    void handlePassings(Collection<Passing> passings);
 
-    default void handleMarkers(Collection<Marker> markers){}
+    void handleMarkers(Collection<Marker> markers);
 
     String getServerName();
 

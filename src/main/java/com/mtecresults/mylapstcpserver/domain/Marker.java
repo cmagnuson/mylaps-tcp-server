@@ -17,7 +17,7 @@ public class Marker {
         EXT_GUN(true, Arrays.asList("ext-1", "ext-2", "ext-gun")),
         MARKER(false, Arrays.asList("mark")),
         LOCATION(false, Arrays.asList("loc")),
-        UNKNOWN(false, Arrays.asList()),
+        UNKNOWN(false, Arrays.asList("")),
         ;
 
         final boolean isGunshot;
