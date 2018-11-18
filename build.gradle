@@ -100,7 +100,7 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
     compile group: 'org.apache.mina', name: 'mina-core', version: '2.0.19'
 
-    compileOnly 'org.slf4j:slf4j-simple:1.7.25'
+    runtime 'org.slf4j:slf4j-simple:1.7.25'
     compileOnly 'org.projectlombok:lombok:1.18.4'
 }
 
