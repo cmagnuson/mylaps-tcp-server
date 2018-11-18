@@ -58,30 +58,6 @@ findbugs {
     effort = "max"
 }
 
-def excludePatterns = ['com/mtecresults/clockcontrol/domain/proto/', 'com/mylaps//']
-for (def excludePattern : excludePatterns) {
-    def excludePatternAntStyle = '**/' + excludePattern + '*'
-    tasks.withType(FindBugs) {
-        classes = classes.filter {
-            !it.path.contains(excludePattern)
-        }
-    }
-    tasks.withType(Checkstyle) {
-        exclude excludePatternAntStyle
-    }
-    tasks.withType(Pmd) {
-        exclude excludePatternAntStyle
-    }
-
-    jacocoTestReport {
-        afterEvaluate {
-            classDirectories = files(classDirectories.files.collect {
-                fileTree(dir: it, exclude: excludePattern)
-            })
-        }
-    }
-}
-
 pmd {
     ignoreFailures = true
     sourceSets = [sourceSets.main]
@@ -119,8 +95,12 @@ pmd {
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.12'
     testImplementation 'org.jmockit:jmockit:1.39'
+
     compile 'org.jeasy:easy-props:2.0.0'
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'org.apache.mina', name: 'mina-core', version: '2.0.19'
+
+    provided group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
     compileOnly 'org.projectlombok:lombok:1.18.4'
 }
 
