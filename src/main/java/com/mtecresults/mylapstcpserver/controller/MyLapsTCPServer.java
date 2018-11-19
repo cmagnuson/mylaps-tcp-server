@@ -36,4 +36,8 @@ public class MyLapsTCPServer {
         LOG.info("Server shutdown for server: "+handler.getServerName()+" port: "+handler.getServerPort());
         acceptor.dispose();
     }
+    
+    public ServerDataHandler getHandler() {
+        return handler;
+    }
 }

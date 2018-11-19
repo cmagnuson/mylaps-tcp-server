@@ -68,8 +68,4 @@ public class TCPMinaHandler extends IoHandlerAdapter {
             session.write(handler.getServerName()+"@AckMarker@"+parts[parts.length-2]+"@"+NEWLINE);
         }
     }
-
-    public ServerDataHandler getHandler() {
-        return handler;
-    }
 }
