@@ -40,11 +40,22 @@ public class TCPMinaHandler extends IoHandlerAdapter {
             session.write(handler.getServerName() + "@AckPong@Version2.1@" + NEWLINE);
         }
         else if(parts.length>3 && parts[1].equals("AckAuth")){
+            //TODO: Future work - keep track of which sessions have been authenticated ok
+            //and add handler.requiresAuthentication() - if not authed and authentication needed
+            //then don't call handlePassings/handleMarkers
             LOG.debug("Acknowledge auth");
-            //For now don't do any auth, just allow any user/password sent
-            //String username = parts[2];
-            //String password = parts[3];
-            session.write(handler.getServerName()+"@AuthOk@"+NEWLINE);
+            String username = parts[2];
+            String password = parts[3];
+            if(password.endsWith("$")){
+                password = password.substring(0, password.length()-1);
+            }
+            boolean allowed = handler.handleLogin(username, password);
+            if(allowed) {
+                session.write(handler.getServerName() + "@AuthOk@" + NEWLINE);
+            }
+            else{
+                session.write(handler.getServerName() + "@AuthFailed@" + NEWLINE);
+            }
         }
         else if(parts.length>1 && parts[1].equals("Passing")){
             LOG.debug("V2 passings received");

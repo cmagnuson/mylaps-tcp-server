@@ -5,13 +5,18 @@ import com.mtecresults.mylapstcpserver.domain.Passing;
 
 import java.util.Collection;
 
-public interface ServerDataHandler {
+public abstract class ServerDataHandler {
 
-    void handlePassings(Collection<Passing> passings);
+    public void handlePassings(Collection<Passing> passings){}
 
-    void handleMarkers(Collection<Marker> markers);
+    public void handleMarkers(Collection<Marker> markers){}
 
-    String getServerName();
+    //return true to accept credentials, false to reject
+    public boolean handleLogin(String username, String password){
+        return true;
+    }
 
-    int getServerPort();
+    public abstract String getServerName();
+
+    public abstract int getServerPort();
 }

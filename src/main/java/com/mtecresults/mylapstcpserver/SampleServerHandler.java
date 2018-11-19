@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 
-public class SampleServerHandler implements ServerDataHandler {
+public class SampleServerHandler extends ServerDataHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(SampleServerHandler.class);
 
@@ -42,5 +42,11 @@ public class SampleServerHandler implements ServerDataHandler {
     @Override
     public int getServerPort() {
         return 3097;
+    }
+
+    @Override
+    public boolean handleLogin(String username, String password) {
+        LOG.info("Authorization message received: "+username+"/"+password);
+        return true;
     }
 }
