@@ -15,7 +15,7 @@ public class MyLapsTCPServer {
 
     private static final Logger LOG = LoggerFactory.getLogger(MyLapsTCPServer.class);
 
-    final IoAcceptor acceptor;
+    final NioSocketAcceptor acceptor;
     final ServerDataHandler handler;
 
     public MyLapsTCPServer(ServerDataHandler handler) throws IOException {
@@ -23,6 +23,7 @@ public class MyLapsTCPServer {
         LOG.info("Server startup for server: "+handler.getServerName()+" port: "+handler.getServerPort());
 
         acceptor = new NioSocketAcceptor();
+        acceptor.setReuseAddress(true);
         //acceptor.getFilterChain().addLast( "logger", new LoggingFilter() );
         TextLineCodecFactory textLineCodecFactory = new TextLineCodecFactory( Charset.forName( "UTF-8" ));
         textLineCodecFactory.setDecoderMaxLineLength(64_000);
