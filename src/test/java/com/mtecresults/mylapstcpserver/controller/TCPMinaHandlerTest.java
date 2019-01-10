@@ -10,7 +10,7 @@ import java.util.Collection;
 
 import static org.junit.Assert.*;
 
-public class TCPMinaHandlerTest implements ServerDataHandler {
+public class TCPMinaHandlerTest extends ServerDataHandler {
 
     Collection<Marker> markersReceived;
     Collection<Passing> passingsReceived;
