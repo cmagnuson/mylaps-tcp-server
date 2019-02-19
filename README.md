@@ -1,5 +1,5 @@
-[![Release](https://jitpack.io/v/User/Repo.svg)]
-(https://jitpack.io/#User/Repo)
+[![Release](https://jitpack.io/v/cmagnuson/mylaps-tcp-server.svg)]
+(https://jitpack.io/#cmagnuson/mylaps-tcp-server)
 
 # mylaps-tcp-server
 
