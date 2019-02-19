@@ -1,3 +1,6 @@
+[![Release](https://jitpack.io/v/User/Repo.svg)]
+(https://jitpack.io/#User/Repo)
+
 # mylaps-tcp-server
 
 Java TCP server for handling Timing and Scoring data feed.  Just override ServerDataHandler and create a new MyLapsTCPServer with that handler.
