@@ -1,6 +1,6 @@
 package com.mtecresults.mylapstcpserver.controller;
 
-import org.apache.mina.core.service.IoAcceptor;
+import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
+import java.util.Set;
 
 public class MyLapsTCPServer {
 
@@ -17,9 +18,12 @@ public class MyLapsTCPServer {
 
     final NioSocketAcceptor acceptor;
     final ServerDataHandler handler;
+    final TCPMinaHandler minaHandler;
+    private final SessionTrackingListener sessionTrackingListener = new SessionTrackingListener();
 
     public MyLapsTCPServer(ServerDataHandler handler) throws IOException {
         this.handler = handler;
+        minaHandler = new TCPMinaHandler(handler);
         LOG.info("Server startup for server: "+handler.getServerName()+" port: "+handler.getServerPort());
 
         acceptor = new NioSocketAcceptor();
@@ -29,7 +33,8 @@ public class MyLapsTCPServer {
         textLineCodecFactory.setDecoderMaxLineLength(64_000);
         textLineCodecFactory.setEncoderMaxLineLength(64_000);
         acceptor.getFilterChain().addLast( "codec", new ProtocolCodecFilter(textLineCodecFactory));
-        acceptor.setHandler(  new TCPMinaHandler(handler));
+        acceptor.addListener(sessionTrackingListener);
+        acceptor.setHandler(minaHandler);
         acceptor.bind( new InetSocketAddress(handler.getServerPort()) );
     }
 
@@ -40,5 +45,9 @@ public class MyLapsTCPServer {
     
     public ServerDataHandler getHandler() {
         return handler;
+    }
+
+    public Set<IoSession> getActiveSessions() {
+        return sessionTrackingListener.getActiveSessions();
     }
 }
