@@ -1,4 +1,4 @@
-[![Release](https://jitpack.io/v/cmagnuson/mylaps-tcp-server.svg)]
+![Release](https://jitpack.io/v/cmagnuson/mylaps-tcp-server.svg)
 (https://jitpack.io/#cmagnuson/mylaps-tcp-server)
 
 # mylaps-tcp-server
