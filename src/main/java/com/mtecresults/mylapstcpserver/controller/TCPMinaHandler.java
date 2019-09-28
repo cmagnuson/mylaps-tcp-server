@@ -1,5 +1,6 @@
 package com.mtecresults.mylapstcpserver.controller;
 
+import com.mtecresults.mylapstcpserver.domain.DataHandlingException;
 import com.mtecresults.mylapstcpserver.domain.Marker;
 import com.mtecresults.mylapstcpserver.domain.Passing;
 import org.apache.mina.core.service.IoHandlerAdapter;
@@ -62,8 +63,14 @@ public class TCPMinaHandler extends IoHandlerAdapter {
             //we don't handle V1 passings "Store", just let them
             //fail/resend until protocol is upgraded to V2
             List<Passing> passings = Passing.parseTimes(location, parts);
-            handler.handlePassings(passings);
-            session.write(handler.getServerName()+"@AckPassing@"+parts[parts.length-2]+"@"+NEWLINE);
+            try {
+                handler.handlePassings(passings);
+                session.write(handler.getServerName() + "@AckPassing@" + parts[parts.length - 2] + "@" + NEWLINE);
+            } catch(DataHandlingException e){
+                //do not acknowledge handling passings
+                LOG.info("Passings not acknowledged: "+e.getMessage());
+                LOG.debug("Passings not acknowledged", e);
+            }
         }
         else if(parts.length>1 && parts[1].equals("Marker")){
             if(parts.length > 2 && !parts[2].contains("=")){
@@ -75,8 +82,14 @@ public class TCPMinaHandler extends IoHandlerAdapter {
 
             LOG.debug("V2 markers received");
             List<Marker> markers = Marker.parseMarkers(location, parts);
-            handler.handleMarkers(markers);
-            session.write(handler.getServerName()+"@AckMarker@"+parts[parts.length-2]+"@"+NEWLINE);
+            try {
+                handler.handleMarkers(markers);
+                session.write(handler.getServerName()+"@AckMarker@"+parts[parts.length-2]+"@"+NEWLINE);
+            } catch(DataHandlingException e){
+                //do not acknowledge handling markers
+                LOG.info("Markers not acknowledged: "+e.getMessage());
+                LOG.debug("Markers not acknowledged", e);
+            }
         }
     }
 }
