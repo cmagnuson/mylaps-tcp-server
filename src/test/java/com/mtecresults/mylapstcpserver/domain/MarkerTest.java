@@ -17,10 +17,10 @@ public class MarkerTest {
         assertEquals(1, markers.size());
 
         Marker m = markers.get(0);
-        assertTrue(m.getType().isGunshot);
-        assertEquals(Marker.MarkerType.GUNSHOT, m.getType());
-        assertEquals("Finish", m.getLocationName());
-        assertEquals("Gunshot 1", m.getLabel());
-        assertEquals("11:03:40.347", new SimpleDateFormat("HH:mm:ss.SSS").format(new Date(m.getTimeMillis())));
+        assertTrue(m.type().isGunshot);
+        assertEquals(Marker.MarkerType.GUNSHOT, m.type());
+        assertEquals("Finish", m.locationName());
+        assertEquals("Gunshot 1", m.label());
+        assertEquals("11:03:40.347", new SimpleDateFormat("HH:mm:ss.SSS").format(new Date(m.timeMillis())));
     }
 }
