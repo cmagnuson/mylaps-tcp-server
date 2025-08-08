@@ -10,10 +10,15 @@ apply plugin: 'jacoco'
 apply plugin: 'maven-publish'
 
 
-group 'com.mtecresults'
+group 'com.github.cmagnuson'
 version = gitVersion.gitVersionInfo.gitVersionName
 
 sourceCompatibility = 17
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
 
 dependencies {
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
@@ -30,10 +35,8 @@ repositories {
 
 publishing {
     publications {
-        release(MavenPublication) {
-            groupId = 'com.mtecresults'
-            artifactId = 'mylapstcpserver'
-            version = '1.0'
+        maven(MavenPublication) {
+            from components.java
         }
     }
 }
