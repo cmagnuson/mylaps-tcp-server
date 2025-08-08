@@ -28,6 +28,16 @@ repositories {
     mavenCentral()
 }
 
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.mtecresults'
+            artifactId = 'mylapstcpserver'
+            version = '1.0'
+        }
+    }
+}
+
 spotbugs {
     ignoreFailures = true
     reportsDir = file("$project.buildDir/reports/findbugs")
