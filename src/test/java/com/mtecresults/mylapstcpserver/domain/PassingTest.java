@@ -17,8 +17,8 @@ public class PassingTest {
 
         assertEquals(2, passings.size());
         Passing p1 = passings.get(0);
-        assertEquals("0000041", p1.getChipcode());
-        assertEquals("10KM", p1.getLocationName());
-        assertEquals("13:11:30.904", new SimpleDateFormat("HH:mm:ss.SSS").format(new Date(p1.getTimeMillis())));
+        assertEquals("0000041", p1.chipcode());
+        assertEquals("10KM", p1.locationName());
+        assertEquals("13:11:30.904", new SimpleDateFormat("HH:mm:ss.SSS").format(new Date(p1.timeMillis())));
     }
 }

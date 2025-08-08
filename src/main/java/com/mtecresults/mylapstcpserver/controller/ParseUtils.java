@@ -1,6 +1,5 @@
 package com.mtecresults.mylapstcpserver.controller;
 
-import com.mtecresults.mylapstcpserver.domain.Passing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,9 +11,9 @@ import java.util.HashMap;
 public class ParseUtils {
 
     private static final Logger LOG = LoggerFactory.getLogger(ParseUtils.class);
-    private static final ThreadLocal<DateFormat> dateFormat = new ThreadLocal(){
+    private static final ThreadLocal<DateFormat> dateFormat = new ThreadLocal<>(){
         @Override
-        public Object get() {
+        public DateFormat get() {
             return new SimpleDateFormat("HH:mm:ss.SSS");
         }
     };
